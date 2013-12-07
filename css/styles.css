@@ -1,0 +1,103 @@
+@CHARSET "utf-8";
+
+
+body {
+}
+
+.gametable-container {
+}
+
+.gametable-spaces {
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  background: rgba(0, 0, 0, 0.1);
+  top: 0px;
+  bottom: 0px;
+  text-align: center;
+  padding-top: 8px;
+}
+
+.gametable-spaces .gametable-space {
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.gametable-spaces .gametable-space.gametable-space-selected img {
+  box-shadow: 0 0 2px 1px rgba(0,0,255,1);
+}
+
+.gametable-spaces .gametable-space img {
+  max-width: 80px;
+  max-height: 80px;
+  vertical-align: middle;
+  border-radius: 10px;
+}
+
+.gametable-spaces .gametable-space label {
+  font-family: Trebuchet MS;
+  font-size: 12px;
+}
+
+.gametable {
+  position: absolute;
+  right: 110px;
+  left: 400px;
+  top: 10px;
+  bottom: 10px;
+  border: 1px solid #000;
+  border-radius: 20px;
+}
+
+.gametable-item {
+  list-style: none;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  cursor: move;
+  background-size: 90% 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  position: absolute;  
+}
+
+.gametable-item:hover {
+  z-index: 99999;
+}
+
+.gametable-item label {
+  background-color: rgba(0,0,0,0.5);
+  color: rgba(255,255,255,1);
+  position: absolute;
+  margin-left: 4px;
+  bottom: 36px;
+  margin-bottom: -28px;
+  border-radius: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 12px;
+  font-family: Trebuchet MS;
+  font-variant:small-caps;
+  box-shadow: 0 0 3px 1px rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
+
+.gametable-audio-item {
+  background-image: url('https://cdn1.iconfinder.com/data/icons/crystalproject/crystal_project_256x256/apps/lsongs.png');
+}
+
+.gametable-link-item {
+  background-image: url('https://cdn1.iconfinder.com/data/icons/crystalproject/crystal_project_256x256/filesystems/Globe.png');
+}
+
+.gametable-dice-item {
+  background-image: url('http://openclipart.org/image/256px/svg_to_png/21223/ClayDowling_D20.png');
+}
+
+.gametable-pdf-item {
+  background-image: url('https://cdn1.iconfinder.com/data/icons/nuvola2/128x128/mimetypes/pdf.png');
+}

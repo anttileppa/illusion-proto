@@ -1,0 +1,17 @@
+@CHARSET "utf-8";
+
+@-moz-keyframes shake { 
+  0% { -moz-transform: rotate(0deg); } 
+  25% { -moz-transform: rotate(3deg); } 
+  50% { -moz-transform: rotate(0deg); } 
+  75% { -moz-transform: rotate(-3deg); } 
+  100% { -moz-transform: rotate(0deg); } 
+}
+
+.tossable:hover {
+  -moz-animation:shake 2s linear infinite;
+}
+
+.tossable.ui-draggable-dragging {
+  -moz-animation:shake 2s linear infinite;
+}
