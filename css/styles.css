@@ -53,7 +53,7 @@ body {
 
 .gametable-item {
   list-style: none;
-  border: 1px solid #dedede;
+  border: 1px solid rgba(0,0,0,0.5);
   border-radius: 10px;
   cursor: move;
   background-size: 90% 90%;
@@ -61,6 +61,8 @@ body {
   background-repeat: no-repeat;
   background-color: #fff;
   z-index: 99;
+  vertical-align: top;
+  margin: 8px;
 }
 
 .gametable-item:hover {
@@ -99,4 +101,20 @@ body {
 
 .gametable-pdf-item {
   background-image: url('https://cdn1.iconfinder.com/data/icons/nuvola2/128x128/mimetypes/pdf.png');
+}
+
+.gametable-item-group {
+  background: #eee;  
+  width: 384px;
+  margin: 4px;
+  border-radius: 10px;
+  padding: 1px;
+}
+
+.gametable-material-item-group {
+  
+}
+
+.gametable-dice-item-group .gametable-item {
+  display: inline-block;
 }

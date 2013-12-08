@@ -54,16 +54,14 @@
           console.log("just tossed");
         })
         .on("tossablepicked", function (event, data) {
-          var width = $(this).gametableItem("option", "width" );
-          var height = $(this).gametableItem("option", "height" );
-
-          $(this).css({
+          var width = $(this).gametableItem("option", "width");
+          var height = $(this).gametableItem("option", "height");
+          
+          $(event.target).css({
             position: 'relative',
             top: 0,
             left: 0
-          });
-          
-          $(event.target).animate({
+          }).animate({
             width: width + 'px', 
             height: height + 'px'
           }, {
@@ -77,10 +75,31 @@
         var _this = $(this);
         
         if (!data.wasTabled) {
+          var placeHolder = $('<div>')
+            .addClass('gametable-item')
+            .css({
+              opacity: 0, 
+              height: $(this).outerHeight() + 'px'
+            });
+          
+          var offset = $(this).offset();
+          
           $(this).css({
-            position: 'absolute'
+            position: 'absolute',
+            top: offset.top + 'px',
+            left: offset.left + 'px'
           });
-
+          
+          placeHolder.insertAfter($(this));
+                    
+          $(placeHolder).slideUp({
+            easing: 'easeOutBounce',
+            duration: 1000,
+            complete: function () {
+              $(this).remove();
+            }
+          });
+          
           $(event.target).animate({
             width: tableWidth + 'px', 
             height: tableHeight + 'px'
@@ -152,8 +171,8 @@
         .on("tossabletabled", function (event, data) {
           var roll = $(this).gametableItemDice("option", "roll" );
           var jsRoll = roll
-            .replace(/([0-9]{1,})([\*]{0,1})(d)([0-9]{1,})/, "($1*(1 + Math.round(Math.random()*($4 - 1))))")
-            .replace(/(d)([0-9]{1,})/, "(1 + Math.round(Math.random()*($2 - 1)))");
+            .replace(/([0-9]{1,})([\*]{0,1})(d)([0-9]{1,})/g, "($1*(1 + Math.round(Math.random()*($4 - 1))))")
+            .replace(/(d)([0-9]{1,})/g, "(1 + Math.round(Math.random()*($2 - 1)))");
           $(this).gametableItem("option", "label", roll + ' = ' + eval(jsRoll));
         })
         .on("tossablepicked", function (event, data) {
@@ -224,6 +243,12 @@
     $('<div>')
     .gametableItemDice({
       roll: 'd6'
+    })
+    .appendTo($('.gametable-dice-item-group'));
+    
+    $('<div>')
+    .gametableItemDice({
+      roll: 'd2+d2+d2'
     })
     .appendTo($('.gametable-dice-item-group'));
   });
