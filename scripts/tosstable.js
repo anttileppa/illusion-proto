@@ -11,7 +11,7 @@ $(function() {
         .disableSelection();
     },
     _onDrop: function (event, ui) {
-      ui.draggable.tossable("tabled");
+      ui.draggable.tossable("tabled", event.target);
     },
     _destroy : function() {
     }
@@ -21,11 +21,15 @@ $(function() {
     options : {},
     _create : function() {
       this._tabled = false;
+      this._table = null;
       
       this.element
         .addClass('tossable')
         .draggable({
-          scope: 'tosstable'
+          scope: 'tosstable',
+          revert: $.proxy(function(dropped) {
+            return !this._wasTabled && !dropped;
+          }, this)
         })
         .on("dragstart", $.proxy(this._dragStart, this))
         .on("dragstop", $.proxy(this._dragStop, this))
@@ -38,7 +42,8 @@ $(function() {
     _dragStop: function (event, ui) {
       if (this._tabled) {
         this._trigger("tabled", event, {
-          wasTabled: this._wasTabled
+          wasTabled: this._wasTabled,
+          table: this._table
         });
       } else {
         if (this._wasTabled) {
@@ -48,8 +53,9 @@ $(function() {
         }
       }
     },
-    tabled: function () {
+    tabled: function (table) {
       this._tabled = true;
+      this._table = table;
     },
     _destroy : function() {
     }

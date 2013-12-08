@@ -46,7 +46,8 @@
         .addClass("gametable-item")
         .css({
           width: this.options.width + 'px',
-          height: this.options.height + 'px'
+          height: this.options.height + 'px',
+          position: 'relative'
         })
         .tossable()
         .on("tossabletossed", function (event, data) {
@@ -56,6 +57,12 @@
           var width = $(this).gametableItem("option", "width" );
           var height = $(this).gametableItem("option", "height" );
 
+          $(this).css({
+            position: 'relative',
+            top: 0,
+            left: 0
+          });
+          
           $(event.target).animate({
             width: width + 'px', 
             height: height + 'px'
@@ -70,6 +77,10 @@
         var _this = $(this);
         
         if (!data.wasTabled) {
+          $(this).css({
+            position: 'absolute'
+          });
+
           $(event.target).animate({
             width: tableWidth + 'px', 
             height: tableHeight + 'px'
@@ -77,7 +88,6 @@
             easing: 'easeOutBounce',
             duration: 1000,
             complete: function () {
-              // tossed to table
             }
           }).css('overflow', 'visible');
         } else {
@@ -187,35 +197,35 @@
       })
       .appendTo($('.gametable-spaces'));
             
-    $('<li>')
+    $('<div>')
       .gametableItemAudio({
         label: 'Vivaldin Neljä vuodenaikaa'
       })
-      .appendTo($(document.body));
+      .appendTo($('.gametable-material-item-group'));
     
-    $('<li>')
+    $('<div>')
       .gametableItemPdf({
         label: 'Aarniometsän Tanssivat ravut #8 - Karvaturrit banaaneja poimimassa'
       })
-      .appendTo($(document.body));
+      .appendTo($('.gametable-material-item-group'));
     
-    $('<li>')
+    $('<div>')
       .gametableItemLink({
         label: 'http://www.google.com'
       })
-      .appendTo($(document.body));
+      .appendTo($('.gametable-material-item-group'));
     
-    $('<li>')
+    $('<div>')
       .gametableItemDice({
         roll: '2d20+20'
       })
-      .appendTo($(document.body));
+      .appendTo($('.gametable-dice-item-group'));
     
-    $('<li>')
+    $('<div>')
     .gametableItemDice({
       roll: 'd6'
     })
-    .appendTo($(document.body));
+    .appendTo($('.gametable-dice-item-group'));
   });
   
 

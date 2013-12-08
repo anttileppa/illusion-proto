@@ -60,11 +60,11 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-color: #fff;
-  position: absolute;  
+  z-index: 99;
 }
 
 .gametable-item:hover {
-  z-index: 99999;
+  z-index: 9999;
 }
 
 .gametable-item label {
@@ -81,7 +81,6 @@ body {
   padding-right: 8px;
   font-size: 12px;
   font-family: Trebuchet MS;
-  font-variant:small-caps;
   box-shadow: 0 0 3px 1px rgba(0,0,0,0.5);
   white-space: nowrap;
 }
