@@ -11,19 +11,19 @@
     }
   });
   
-  $.widget("custom.gametableSpace", {
+  $.widget("custom.gametableSpaceIcon", {
     options : {
       name: 'Untitled', 
       image: 'about:blank'
     },
     _create : function() {
       this.element
-        .addClass("gametable-space")
+        .addClass("gametable-space-icon")
         .append($('<img>').attr("src", this.options.image))
         .append($('<label>').text(this.options.name));
       
       if (this.options.selected) {
-        this.element.addClass("gametable-space-selected");
+        this.element.addClass("gametable-space-icon-selected");
       }
     },
     _destroy : function() {
@@ -170,9 +170,9 @@
         })
         .on("tossabletabled", function (event, data) {
           var roll = $(this).gametableItemDice("option", "roll" );
-          var jsRoll = roll
-            .replace(/([0-9]{1,})([\*]{0,1})(d)([0-9]{1,})/g, "($1*(1 + Math.round(Math.random()*($4 - 1))))")
-            .replace(/(d)([0-9]{1,})/g, "(1 + Math.round(Math.random()*($2 - 1)))");
+          var jsRoll = 'Math.round(' + roll
+            .replace(/([0-9]{1,})([\*]{0,1})(d)([0-9]{1,})/g, "($1*(1 + (Math.random()*($4 - 1))))")
+            .replace(/(d)([0-9]{1,})/g, "(1 + (Math.random()*($2 - 1)))") + ')';
           $(this).gametableItem("option", "label", roll + ' = ' + eval(jsRoll));
         })
         .on("tossablepicked", function (event, data) {
@@ -188,33 +188,33 @@
       .gametable();
     
     $('<div>')
-      .gametableSpace({
+      .gametableSpaceIcon({
         name: 'Shared Space', 
         image: 'http://farm5.staticflickr.com/4118/4857026160_be2146d4fa.jpg',
         selected: true
       })
-      .appendTo($('.gametable-spaces'));
+      .appendTo($('.gametable-space-icons'));
 
     $('<div>')
-      .gametableSpace({
+      .gametableSpaceIcon({
         name: 'Board', 
         image: 'http://farm3.staticflickr.com/2625/3774896826_a9eb810112.jpg'
       })
-      .appendTo($('.gametable-spaces'));
+      .appendTo($('.gametable-space-icons'));
     
     $('<div>')
-      .gametableSpace({
+      .gametableSpaceIcon({
         name: 'Enslaver of Humanity', 
         image: 'http://farm9.staticflickr.com/8037/8056870326_24befc3c2f.jpg'
       })
-      .appendTo($('.gametable-spaces'));
+      .appendTo($('.gametable-space-icons'));
 
     $('<div>')
-      .gametableSpace({
+      .gametableSpaceIcon({
         name: 'Mr Monkey', 
         image: 'http://farm2.staticflickr.com/1233/4726132269_aa71fe7a4c.jpg'
       })
-      .appendTo($('.gametable-spaces'));
+      .appendTo($('.gametable-space-icons'));
             
     $('<div>')
       .gametableItemAudio({
@@ -243,6 +243,12 @@
     $('<div>')
     .gametableItemDice({
       roll: 'd6'
+    })
+    .appendTo($('.gametable-dice-item-group'));
+    
+    $('<div>')
+    .gametableItemDice({
+      roll: 'd100 / 3'
     })
     .appendTo($('.gametable-dice-item-group'));
     

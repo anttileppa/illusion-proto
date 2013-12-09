@@ -7,7 +7,7 @@ body {
 .gametable-container {
 }
 
-.gametable-spaces {
+.gametable-space-icons {
   position: absolute;
   right: 0px;
   width: 100px;
@@ -18,25 +18,25 @@ body {
   padding-top: 8px;
 }
 
-.gametable-spaces .gametable-space {
+.gametable-space-icons .gametable-space-icon {
   margin-left: 4px;
   margin-right: 4px;
   margin-bottom: 8px;
   cursor: pointer;
 }
 
-.gametable-spaces .gametable-space.gametable-space-selected img {
+.gametable-space-icons .gametable-space-icon.gametable-space-icon-selected img {
   box-shadow: 0 0 2px 1px rgba(0,0,255,1);
 }
 
-.gametable-spaces .gametable-space img {
+.gametable-space-icons .gametable-space-icon img {
   max-width: 80px;
   max-height: 80px;
   vertical-align: middle;
   border-radius: 10px;
 }
 
-.gametable-spaces .gametable-space label {
+.gametable-space-icons .gametable-space-icon label {
   font-family: Trebuchet MS;
   font-size: 12px;
 }
@@ -62,7 +62,9 @@ body {
   background-color: #fff;
   z-index: 99;
   vertical-align: top;
-  margin: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 8px;
 }
 
 .gametable-item:hover {
