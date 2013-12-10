@@ -34,8 +34,8 @@
     options : {
       width: 64,
       height: 64,
-      tableWidth: 128,
-      tableHeight: 128
+      tableWidth: 96,
+      tableHeight: 96
     },
     _create : function() {
       $('<label>')
@@ -56,18 +56,22 @@
         .on("tossablepicked", function (event, data) {
           var width = $(this).gametableItem("option", "width");
           var height = $(this).gametableItem("option", "height");
+          var origParent = $(event.target).data('orig-parent');
           
           $(event.target).css({
             position: 'relative',
             top: 0,
             left: 0
-          }).animate({
+          })
+          .appendTo(origParent)
+          .animate({
             width: width + 'px', 
             height: height + 'px'
           }, {
             easing: 'easeOutBounce',
             duration: 1000
-          }).css('overflow', 'visible');
+          })
+          .css('overflow', 'visible');
       })
       .on("tossabletabled", function (event, data) {
         var tableWidth = $(this).gametableItem("option", "tableWidth" );
@@ -75,11 +79,12 @@
         var _this = $(this);
         
         if (!data.wasTabled) {
-          var placeHolder = $('<div>')
-            .addClass('gametable-item')
+          var placeHolder = $('<span>')
             .css({
               opacity: 0, 
-              height: $(this).outerHeight() + 'px'
+              width: $(this).outerWidth() + 'px', 
+              height: $(this).outerHeight() + 'px',
+              display: $(this).css("display")
             });
           
           var offset = $(this).offset();
@@ -91,8 +96,11 @@
           });
           
           placeHolder.insertAfter($(this));
-                    
-          $(placeHolder).slideUp({
+         
+          $(placeHolder).animate({
+            width: 0,
+            height: 0
+          },{
             easing: 'easeOutBounce',
             duration: 1000,
             complete: function () {
@@ -107,6 +115,14 @@
             easing: 'easeOutBounce',
             duration: 1000,
             complete: function () {
+              $(this).data('orig-parent', $(this).parent());
+              var tableOffset = $(data.table).offset();
+              var itemOffset = $(this).offset();
+              
+              $(data.table).append( $(this).css({
+                top: (itemOffset.top - tableOffset.top) + 'px',
+                left: (itemOffset.left - tableOffset.left) + 'px'
+              }));
             }
           }).css('overflow', 'visible');
         } else {
@@ -184,8 +200,27 @@
   });
 
   $(document).ready(function() {
-    $(".gametable")
-      .gametable();
+    $("<div>")
+      .addClass('gametable-space')
+      .css({
+        "width": "50%",
+        "height": "100%",
+        "display": "inline-block",
+        "background": "rgba(0,255,0,0.4)"
+      })
+      .gametable()
+      .appendTo('.gametable-spaces');  
+    
+    $("<div>")
+    .addClass('gametable-space')
+    .css({
+      "width": "50%",
+      "height": "100%",
+      "display": "inline-block",
+      "background": "rgba(255,128,0,0.4)"
+    })
+    .gametable()
+    .appendTo('.gametable-spaces');  
     
     $('<div>')
       .gametableSpaceIcon({
