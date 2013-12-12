@@ -52,30 +52,6 @@ $(function() {
         })
         .tossable()
         .on("mousedown", $.proxy(function (event, data) {
-/**          
-          var offset = $(this.element).offset();
-          var placeHolder = $('<span>')
-            .css({
-              opacity: 0, 
-              width: $(this.element).outerWidth() + 'px', 
-              height: $(this.element).outerHeight() + 'px',
-              display: $(this.element).css("display"),
-              position: $(this.element).css("position"),
-              marginLeft: $(this.element).css("marginLeft"),
-              marginTop: $(this.element).css("marginTop"),
-              marginRight: $(this.element).css("marginRight"),
-              marginBottom: $(this.element).css("marginBottom")
-            });
-          
-          $(this.element).css({
-            position: 'absolute',
-            top: offset.top + 'px',
-            left: offset.left + 'px',
-            margin: 0
-          });
-          
-          placeHolder.insertAfter($(this.element));
-**/
           if (!$(this.element).data('originals')) {
             $(this.element).data('originals', {
               parent: $(this.element).parent(),
@@ -90,7 +66,6 @@ $(function() {
             });
           }
           
-         
           $(this.element).css({
             margin: 0
           });
@@ -109,7 +84,7 @@ $(function() {
           this._revert();
         }, this))
         .on("tossabletabled", function (event, data) {
-      })
+        })
     },
     _setOption: function( key, value ) {
       if (key === "label") {
@@ -241,8 +216,16 @@ $(function() {
       this.element
         .addClass("gametable-link-item")
         .gametableItem({
-          label: this.options.label
-        });
+          label: this.options.link
+        })
+        .on("dblclick", $.proxy(function (event) {
+          var table = $(this.element).tossable("table");
+          if (table) {
+            $('<iframe>')
+              .attr("src", this.options.link)
+              .appendTo(table);
+          }
+        }, this));
     },
     _destroy : function() {
     }

@@ -66,7 +66,7 @@
     
     $('<div>')
       .gametableItemLink({
-        label: 'http://www.google.com'
+        link: 'http://www.google.com'
       })
       .appendTo($('.gametable-material-item-group'));
     

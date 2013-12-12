@@ -76,6 +76,9 @@ $(function() {
         }
       }
     },
+    table: function () {
+      return this._table;
+    },
     tabled: function (table) {
       this._table = table;
     },
